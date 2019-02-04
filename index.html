@@ -28,11 +28,11 @@ function mainContainer(row,col){
   }
   gridRowsString = gridRowsString.join(" ")
 }
-//Create black color
+//Define black color
 function blackCells(e){
   e.target.style.backgroundColor = "#000";
 }
-//Define Random rainbow Colors
+//Create Random rainbow Colors
 function getRandomColor(){
   let colorCodes = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"];
   let rainbow = "#";
@@ -40,14 +40,28 @@ function getRandomColor(){
     rainbow += colorCodes[Math.floor(Math.random() * 16)]
   }
   return rainbow;
-
 }
-
-//create Random rainbow colors
+//Now Define Random rainbow colors
 function rainbowColor(e){
   let randomColor = getRandomColor();
   e.target.style.backgroundColor = randomColor;
 }
+// DOM Setup
+let cellContainer = document.createElement("div");
+cellContainer.setAttribute("id","cellContainer");
+
+let overallContainer = document.getElementById("overallContainer");
+overallContainer.appendChild(cellContainer);
+//Create and Remove Container
+function createContainer(){
+  cellContainer = document.createElement("div");
+  cellContainer.setAttribute("id","cellContainer");
+  overAllContainer.appendChild(cellContainer);
+}
+function removeContainer(){
+  overAllContainer.removeChild(cellContainer);
+}
+
 
   </script>
 </body> 
