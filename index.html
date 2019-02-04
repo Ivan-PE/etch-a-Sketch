@@ -1,12 +1,19 @@
 <html>
 <head> 
-    <link href="index.css" type="text/css" rel="stylesheet">
+  <title>Etch A Sletch with Javascript</title>
+    <link href="style.css" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR" rel="stylesheet">
  
 </head> 
 <body> 
+  <h1>Ectch A Sketch JS</h1>
  <div id="container"> </div>
-
+ <div id="buttonHolder">
+ <button id="resetButton">Reset</button>
+ <button id="rainbowButton">Rainbow</button>
+ <button id="blackButton">Black</button>
+</div>
+<div id="overallContainer"></div>
 
   <script language="javascript"> 
 //Start Default Grid
@@ -14,6 +21,33 @@ let row = 16;
 let col = 16;
 let gridRowsString = [];
 
+function mainContainer(row,col){
+  gridRowsString = [];
+  for(i=0;i<row;i++){
+    gridRowsString.push("auto");
+  }
+  gridRowsString = gridRowsString.join(" ")
+}
+//Create black color
+function blackCells(e){
+  e.target.style.backgroundColor = "#000";
+}
+//Define Random rainbow Colors
+function getRandomColor(){
+  let colorCodes = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"];
+  let rainbow = "#";
+  for(i=0;i<6;i++){
+    rainbow += colorCodes[Math.floor(Math.random() * 16)]
+  }
+  return rainbow;
+
+}
+
+//create Random rainbow colors
+function rainbowColor(e){
+  let randomColor = getRandomColor();
+  e.target.style.backgroundColor = randomColor;
+}
 
   </script>
 </body> 
