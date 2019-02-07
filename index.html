@@ -6,7 +6,7 @@
  
 </head> 
 <body> 
-  <h1>Ectch A Sketch JS</h1>
+  <h1>Etch A Sketch JS</h1>
  <div id="container"> </div>
  <div id="buttonHolder">
  <button id="resetButton">Reset</button>
@@ -16,10 +16,7 @@
 <div id="overallContainer"></div>
 
   <script language="javascript"> 
-//Start Default Grid
-let row = 16;
-let col = 16;
-let gridRowsString = [];
+
 
 function mainContainer(row,col){
   gridRowsString = [];
@@ -27,10 +24,28 @@ function mainContainer(row,col){
     gridRowsString.push("auto");
   }
   gridRowsString = gridRowsString.join(" ")
+  cellContainer.style.gridTemplateRows = gridRowsString;
+  cellContainer.style.gridTemplateColumns = gridRowsString;
+}
+
+function createCells(row,col){
+  for(i=0;i < row; i++){
+    for (j=0;j < col; j++){
+      let div = document.createElement("div");
+      div.classList.add("cell");
+      div.addEventListener("mouseover", blackCells);
+      cellContainer.appendChild(div);
+    }
+  }
 }
 //Define black color
 function blackCells(e){
   e.target.style.backgroundColor = "#000";
+}
+//Define RAinbows
+function colorCellsRainbow(e){
+  let randomColor = getRandomColor();
+  e.target.style.backgroundColor = randomColor;
 }
 //Create Random rainbow Colors
 function getRandomColor(){
@@ -56,13 +71,54 @@ overallContainer.appendChild(cellContainer);
 function createContainer(){
   cellContainer = document.createElement("div");
   cellContainer.setAttribute("id","cellContainer");
-  overAllContainer.appendChild(cellContainer);
+  overallContainer.appendChild(cellContainer);
 }
 function removeContainer(){
-  overAllContainer.removeChild(cellContainer);
+  overallContainer.removeChild(cellContainer);
 }
+//Buttons Events
+let resetButton = document.getElementById('resetButton');
+let rainbowButton = document.getElementById('rainbowButton');
+let blackButton = document.getElementById('blackButton');
+//Reset BUTTON
+resetButton.addEventListener("click", function(e){
+    let rows = Number(prompt("Change Number Of Grid Cells"));
+    if(!Number.isInteger(rows) || rows < 1 || rows > 64){
+      alert("PLease Enter Only Numbers from 1 to 64")
+      return;
+    }
+  removeContainer();
+  createContainer(rows,rows);
+  mainContainer(rows,rows);
+  createCells(rows,rows);
+})
+//Rainbow Button
+rainbowButton.addEventListener("click", function(e){
+  let cells = document.querySelectorAll(".cell");
+  cells.forEach(function(element){
+    element.removeEventListener("mouseover",blackCells);
+    element.addEventListener("mouseover",colorCellsRainbow);
+  })
+})
+//Black Color Button
+blackButton.addEventListener("click",function(e){
+  let cells = document.querySelectorAll(".cell");
+  cells.forEach(function(element){
+    element.removeEventListener("mouseover",colorCellsRainbow);
+    element.addEventListener("mouseover",blackCells);
+  })
+})
 
 
-  </script>
+//Start Default Grid
+let row = 16;
+let col = 16;
+let gridRowsString = [];
+
+mainContainer(row, col);
+createCells(row, col);
+
+
+</script>
 </body> 
 </html>

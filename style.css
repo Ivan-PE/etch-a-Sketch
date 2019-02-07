@@ -69,15 +69,13 @@ h1{
 #cellContainer{
   width: 800px;
   height: 800px;
-  background-color: white;
+  background-color:#3e3d3d;
   margin: 0 auto;
   display: grid;
- 
-  grid-column-gap: 2px;
-  grid-row-gap: 2px;
+  grid-column-gap: 1px;
+  grid-row-gap: 1px;
 }
 
 .cell{
-  border-radius: 10%;
-  background-color: grey;
+  background-color:#e6e3e3;
 }
